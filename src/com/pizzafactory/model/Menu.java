@@ -33,5 +33,17 @@ public class Menu {
     }
 
     // Getters for pizzas, toppings, sides, and crusts
-    // ...
+    public List<Pizza> getPizzas() {
+        return pizzas;
+    }
+    public List<Topping> getToppings() {
+        return toppings;
+    }
+    public List<Side> getSides() {
+        return sides;
+    }
+    public List<Crust> getCrusts() {
+        return crusts;
+    }
+
 }

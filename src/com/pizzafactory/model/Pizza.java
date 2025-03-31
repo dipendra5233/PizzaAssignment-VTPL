@@ -8,8 +8,8 @@ public class Pizza {
     private String size;
     private String type;
     private Crust crust;
-    private List<Topping> toppings;
     private double price;
+    private List<Topping> toppings = new ArrayList<>();
 
     public Pizza(String name, String size, String type, Crust crust, double price) {
         this.name = name;
@@ -17,7 +17,23 @@ public class Pizza {
         this.type = type;
         this.crust = crust;
         this.price = price;
-        this.toppings = new ArrayList<>();
+    }
+
+    // Getters and setters
+    public String getName() {
+        return name;
+    }
+
+    public void setCrust(Crust crust) {
+        this.crust = crust;
+    }
+
+    public Crust getCrust() {
+        return crust;
+    }
+
+    public List<Topping> getToppings() {
+        return toppings;
     }
 
     public void addTopping(Topping topping) {
@@ -28,6 +44,23 @@ public class Pizza {
         return price;
     }
 
-    // Getters and setters
-    // ...
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public String getSize() {
+        return size;
+    }
+    public void setSize(String size) {
+        this.size = size;
+    }
+    public String getType() {
+        return type;
+    }
+    public void setType(String type) {
+        this.type = type;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

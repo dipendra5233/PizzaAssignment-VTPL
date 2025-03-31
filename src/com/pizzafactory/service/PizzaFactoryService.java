@@ -7,40 +7,72 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PizzaFactoryService {
-    private Menu menu;
-    private Inventory inventory;
-    private List<Order> orders;
+    private List<Pizza> pizzas = new ArrayList<>();
+    private List<Category> categories = new ArrayList<>();
+    private List<Topping> toppings = new ArrayList<>();
+    private List<Side> sides = new ArrayList<>();
+    private List<Crust> crusts = new ArrayList<>();
+    private Inventory inventory = new Inventory();
 
-    public PizzaFactoryService() {
-        this.menu = new Menu();
-        this.inventory = new Inventory();
-        this.orders = new ArrayList<>();
+    public synchronized void initializeMenu() {
+        pizzas.clear();
+        categories.clear();
+        toppings.clear();
+        sides.clear();
+        crusts.clear();
     }
 
-    public void addPizzaToMenu(Pizza pizza) {
-        menu.addPizza(pizza);
+    public synchronized void addPizzaToMenu(Pizza pizza) {
+        pizzas.add(pizza);
     }
 
-    public void addToppingToMenu(Topping topping) {
-        menu.addTopping(topping);
+    public synchronized void addCategoryToMenu(Category category) {
+        categories.add(category);
     }
 
-    public void addSideToMenu(Side side) {
-        menu.addSide(side);
+    public synchronized void addToppingToMenu(Topping topping) {
+        toppings.add(topping);
     }
 
-    public void addCrustToMenu(Crust crust) {
-        menu.addCrust(crust);
+    public synchronized void addSideToMenu(Side side) {
+        sides.add(side);
     }
 
-    public boolean placeOrder(Order order) {
-        if (BusinessRules.verifyOrder(order, inventory)) {
-            orders.add(order);
-            inventory.updateInventory(order);
-            return true;
+    public synchronized void addCrustToMenu(Crust crust) {
+        crusts.add(crust);
+    }
+
+    public synchronized boolean placeOrder(Order order) {
+        if (!BusinessRules.verifyOrder(order, inventory)) {
+            return false;
         }
-        return false;
+        // Deduct inventory
+        for (Pizza pizza : order.getPizzas()) {
+            inventory.deduct(pizza.getName(), 1);
+            for (Topping topping : pizza.getToppings()) {
+                inventory.deduct(topping.getName(), 1);
+            }
+        }
+        for (Side side : order.getSides()) {
+            inventory.deduct(side.getName(), 1);
+        }
+        return true;
     }
 
-    // Other methods to manage inventory, orders, etc.
+    public synchronized void restockInventory(String item, int quantity) {
+        inventory.restock(item, quantity);
+    }
+
+    public synchronized Inventory getInventory() {
+        return inventory;
+    }
+
+    public synchronized void changePrice(String pizzaName, double newPrice) {
+        for (Pizza pizza : pizzas) {
+            if (pizza.getName().equals(pizzaName)) {
+                pizza.setPrice(newPrice);
+                break;
+            }
+        }
+    }
 }

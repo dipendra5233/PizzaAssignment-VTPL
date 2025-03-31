@@ -5,31 +5,40 @@ import java.util.List;
 
 public class Order {
     private Customer customer;
-    private List<Pizza> pizzas;
-    private List<Side> sides;
-    private double totalAmount;
+    private List<Pizza> pizzas = new ArrayList<>();
+    private List<Side> sides = new ArrayList<>();
 
     public Order(Customer customer) {
         this.customer = customer;
-        this.pizzas = new ArrayList<>();
-        this.sides = new ArrayList<>();
-        this.totalAmount = 0.0;
     }
 
     public void addPizza(Pizza pizza) {
         pizzas.add(pizza);
-        totalAmount += pizza.getPrice();
     }
 
     public void addSide(Side side) {
         sides.add(side);
-        totalAmount += side.getPrice();
+    }
+
+    public List<Pizza> getPizzas() {
+        return pizzas;
+    }
+
+    public List<Side> getSides() {
+        return sides;
     }
 
     public double getTotalAmount() {
-        return totalAmount;
+        double total = 0;
+        for (Pizza pizza : pizzas) {
+            total += pizza.getPrice();
+            for (Topping topping : pizza.getToppings()) {
+                total += topping.getPrice();
+            }
+        }
+        for (Side side : sides) {
+            total += side.getPrice();
+        }
+        return total;
     }
-
-    // Getters and setters
-    // ...
 }

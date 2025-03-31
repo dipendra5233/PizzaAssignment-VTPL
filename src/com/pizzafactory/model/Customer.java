@@ -10,5 +10,19 @@ public class Customer {
     }
 
     // Getters and setters
-    // ...
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    // Getters and setters
+    public String getContact() {
+        return contact;
+    }
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+
 }
