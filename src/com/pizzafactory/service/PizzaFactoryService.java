@@ -44,6 +44,7 @@ public class PizzaFactoryService {
 
     public synchronized boolean placeOrder(Order order) {
         if (!BusinessRules.verifyOrder(order, inventory)) {
+            System.out.println("Order verification failed.");
             return false;
         }
         // Deduct inventory
