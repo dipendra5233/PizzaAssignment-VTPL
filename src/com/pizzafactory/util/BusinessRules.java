@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BusinessRules {
-    private List<BusinessRule> rules;
+    private final List<BusinessRule> rules;
 
     public BusinessRules() {
         rules = new ArrayList<>();
