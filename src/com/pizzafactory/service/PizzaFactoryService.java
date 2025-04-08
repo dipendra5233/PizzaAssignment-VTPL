@@ -13,8 +13,9 @@ public class PizzaFactoryService {
     private List<Side> sides = new ArrayList<>();
     private List<Crust> crusts = new ArrayList<>();
     private Inventory inventory = new Inventory();
+    private BusinessRules businessRules = new BusinessRules();
 
-    public synchronized void initializeMenu() {
+        public synchronized void initializeMenu() {
         pizzas.clear();
         categories.clear();
         toppings.clear();
@@ -43,7 +44,7 @@ public class PizzaFactoryService {
     }
 
     public synchronized boolean placeOrder(Order order) {
-        if (!BusinessRules.verifyOrder(order, inventory)) {
+        if (!businessRules.verifyOrder(order, inventory)) {
             System.out.println("Order verification failed.");
             return false;
         }

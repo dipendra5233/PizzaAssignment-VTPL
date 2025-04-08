@@ -16,13 +16,13 @@ public class PizzaFactoryServiceTest {
         pizzaFactory = new PizzaFactoryService();
 
         // Set up the menu
-        pizzaFactory.addPizzaToMenu(new Pizza("Deluxe Veggie", "Regular", "Vegetarian", new Crust("New hand tossed"), 150));
-        pizzaFactory.addPizzaToMenu(new Pizza("Chicken Tikka", "Medium", "Non-Vegetarian", new Crust("Cheese Burst"), 370));
+        pizzaFactory.addPizzaToMenu(new Pizza("Deluxe Veggie", "Regular", "Veg", new Crust("New hand tossed"), 150));
+        pizzaFactory.addPizzaToMenu(new Pizza("Chicken Tikka", "Medium", "Non-Veg", new Crust("Cheese Burst"), 370));
 
         // Add toppings to menu
-        pizzaFactory.addToppingToMenu(new Topping("Black olive", 20));
-        pizzaFactory.addToppingToMenu(new Topping("Chicken tikka", 35));
-        pizzaFactory.addToppingToMenu(new Topping("Paneer", 35));
+        pizzaFactory.addToppingToMenu(new Topping("Black olive", 20, "Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Chicken tikka", 35, "Non-Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Paneer", 35, "Veg"));
 
         // Add sides to menu
         pizzaFactory.addSideToMenu(new Side("Cold drink", 55));
@@ -37,8 +37,8 @@ public class PizzaFactoryServiceTest {
     public void testPlaceOrder() {
         Customer customer = new Customer("John Doe", "1234567890");
         Order order = new Order(customer);
-        Pizza pizza = new Pizza("Deluxe Veggie", "Regular", "Vegetarian", new Crust("New hand tossed"), 150);
-        pizza.addTopping(new Topping("Black olive", 20));
+        Pizza pizza = new Pizza("Deluxe Veggie", "Regular", "Veg", new Crust("New hand tossed"), 150);
+        pizza.addTopping(new Topping("Black olive", 20, "Veg"));
         order.addPizza(pizza);
         order.addSide(new Side("Cold drink", 55));
 
@@ -53,7 +53,7 @@ public class PizzaFactoryServiceTest {
 
     @Test
     public void testChangePrice() {
-        Pizza pizza = new Pizza("Deluxe Veggie", "Regular", "Vegetarian", new Crust("New hand tossed"), 150);
+        Pizza pizza = new Pizza("Deluxe Veggie", "Regular", "Veg", new Crust("New hand tossed"), 150);
         pizzaFactory.addPizzaToMenu(pizza);
         pizzaFactory.changePrice("Deluxe Veggie", 200);
         assertEquals(200, pizza.getPrice());
@@ -63,27 +63,27 @@ public class PizzaFactoryServiceTest {
     public void testVegetarianPizzaWithNonVegetarianTopping() {
         Customer customer = new Customer("Jane Doe", "0987654321");
         Order order = new Order(customer);
-        Pizza pizza = new Pizza("Deluxe Veggie", "Regular", "Vegetarian", new Crust("New hand tossed"), 150);
-        pizza.addTopping(new Topping("Chicken tikka", 35));
+        Pizza pizza = new Pizza("Deluxe Veggie", "Regular", "Veg", new Crust("New hand tossed"), 150);
+        pizza.addTopping(new Topping("Chicken tikka", 35, "Non-Veg"));
         order.addPizza(pizza);
 
-        assertFalse(BusinessRules.verifyOrder(order, pizzaFactory.getInventory()));
+        assertFalse(new BusinessRules().verifyOrder(order, pizzaFactory.getInventory()));
     }
 
     @Test
     public void testNonVegetarianPizzaWithPaneerTopping() {
         Customer customer = new Customer("Jane Doe", "0987654321");
         Order order = new Order(customer);
-        Pizza pizza = new Pizza("Chicken Tikka", "Medium", "Non-Vegetarian", new Crust("Cheese Burst"), 370);
-        pizza.addTopping(new Topping("Paneer", 35));
+        Pizza pizza = new Pizza("Chicken Tikka", "Medium", "Non-Veg", new Crust("Cheese Burst"), 370);
+        pizza.addTopping(new Topping("Paneer", 35, "Veg"));
         order.addPizza(pizza);
 
-        assertFalse(BusinessRules.verifyOrder(order, pizzaFactory.getInventory()));
+        assertFalse(new BusinessRules().verifyOrder(order, pizzaFactory.getInventory()));
     }
 
     @Test
     public void testSingleCrustPerPizza() {
-        Pizza pizza = new Pizza("Deluxe Veggie", "Regular", "Vegetarian", new Crust("New hand tossed"), 150);
+        Pizza pizza = new Pizza("Deluxe Veggie", "Regular", "Veg", new Crust("New hand tossed"), 150);
         pizza.setCrust(new Crust("Cheese Burst"));
         assertEquals("Cheese Burst", pizza.getCrust().getName());
     }
@@ -92,24 +92,24 @@ public class PizzaFactoryServiceTest {
     public void testSingleNonVegToppingPerPizza() {
         Customer customer = new Customer("Jane Doe", "0987654321");
         Order order = new Order(customer);
-        Pizza pizza = new Pizza("Chicken Tikka", "Medium", "Non-Vegetarian", new Crust("Cheese Burst"), 370);
-        pizza.addTopping(new Topping("Chicken tikka", 35));
-        pizza.addTopping(new Topping("Barbeque chicken", 45));
+        Pizza pizza = new Pizza("Chicken Tikka", "Medium", "Non-Veg", new Crust("Cheese Burst"), 370);
+        pizza.addTopping(new Topping("Chicken tikka", 35, "Non-Veg"));
+        pizza.addTopping(new Topping("Barbeque chicken", 45, "Non-Veg"));
         order.addPizza(pizza);
 
-        assertFalse(BusinessRules.verifyOrder(order, pizzaFactory.getInventory()));
+        assertFalse(new BusinessRules().verifyOrder(order, pizzaFactory.getInventory()));
     }
 
     @Test
     public void testLargePizzaWithTwoFreeToppings() {
         Customer customer = new Customer("Jane Doe", "0987654321");
         Order order = new Order(customer);
-        Pizza pizza = new Pizza("Deluxe Veggie", "Large", "Vegetarian", new Crust("New hand tossed"), 325);
-        pizza.addTopping(new Topping("Black olive", 20));
-        pizza.addTopping(new Topping("Paneer", 35));
+        Pizza pizza = new Pizza("Deluxe Veggie", "Large", "Veg", new Crust("New hand tossed"), 325);
+        pizza.addTopping(new Topping("Black olive", 20, "Veg"));
+        pizza.addTopping(new Topping("Paneer", 35, "Veg"));
         order.addPizza(pizza);
 
-        assertTrue(BusinessRules.verifyOrder(order, pizzaFactory.getInventory()));
+        assertTrue(new BusinessRules().verifyOrder(order, pizzaFactory.getInventory()));
         assertEquals(325, pizza.getPrice());
     }
 
@@ -117,10 +117,10 @@ public class PizzaFactoryServiceTest {
     public void testMultiplePizzasInOrder() {
         Customer customer = new Customer("Alice", "9876543210");
         Order order = new Order(customer);
-        Pizza pizza1 = new Pizza("Deluxe Veggie", "Regular", "Vegetarian", new Crust("New hand tossed"), 150);
-        pizza1.addTopping(new Topping("Black olive", 20));
-        Pizza pizza2 = new Pizza("Chicken Tikka", "Medium", "Non-Vegetarian", new Crust("Cheese Burst"), 370);
-        pizza2.addTopping(new Topping("Chicken tikka", 35));
+        Pizza pizza1 = new Pizza("Deluxe Veggie", "Regular", "Veg", new Crust("New hand tossed"), 150);
+        pizza1.addTopping(new Topping("Black olive", 20, "Veg"));
+        Pizza pizza2 = new Pizza("Chicken Tikka", "Medium", "Non-Veg", new Crust("Cheese Burst"), 370);
+        pizza2.addTopping(new Topping("Chicken tikka", 35, "Non-Veg"));
         order.addPizza(pizza1);
         order.addPizza(pizza2);
 
@@ -130,9 +130,9 @@ public class PizzaFactoryServiceTest {
 
     @Test
     public void testSelectCrustAndAddToppings() {
-        Pizza pizza = new Pizza("Paneer Tikka", "Large", "Vegetarian", new Crust("Fresh pan pizza"), 340);
-        pizza.addTopping(new Topping("Capsicum", 25));
-        pizza.addTopping(new Topping("Mushroom", 30));
+        Pizza pizza = new Pizza("Paneer Tikka", "Large", "Veg", new Crust("Fresh pan pizza"), 340);
+        pizza.addTopping(new Topping("Capsicum", 25, "Veg"));
+        pizza.addTopping(new Topping("Mushroom", 30, "Veg"));
 
         assertEquals("Fresh pan pizza", pizza.getCrust().getName());
         assertEquals(2, pizza.getToppings().size());
@@ -142,8 +142,8 @@ public class PizzaFactoryServiceTest {
     public void testVerifyOrderAmount() {
         Customer customer = new Customer("Bob", "1122334455");
         Order order = new Order(customer);
-        Pizza pizza = new Pizza("Cheese and corn", "Medium", "Vegetarian", new Crust("Wheat thin crust"), 375);
-        pizza.addTopping(new Topping("Paneer", 35));
+        Pizza pizza = new Pizza("Cheese and corn", "Medium", "Veg", new Crust("Wheat thin crust"), 375);
+        pizza.addTopping(new Topping("Paneer", 35, "Veg"));
         order.addPizza(pizza);
         order.addSide(new Side("Mousse cake", 90));
 
@@ -155,7 +155,7 @@ public class PizzaFactoryServiceTest {
     public void testAddSideOrder() {
         Customer customer = new Customer("Charlie", "5544332211");
         Order order = new Order(customer);
-        Pizza pizza = new Pizza("Non-Veg Supreme", "Large", "Non-Vegetarian", new Crust("New hand tossed"), 425);
+        Pizza pizza = new Pizza("Non-Veg Supreme", "Large", "Non-Veg", new Crust("New hand tossed"), 425);
         order.addPizza(pizza);
         order.addSide(new Side("Cold drink", 55));
 

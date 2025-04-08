@@ -29,15 +29,15 @@ public class Main {
         pizzaFactory.addPizzaToMenu(new Pizza("Pepper Barbecue Chicken", "Regular", "Non-Vegetarian", new Crust("New hand tossed"), 220));
 
         // Add toppings to menu
-        pizzaFactory.addToppingToMenu(new Topping("Black olive", 20));
-        pizzaFactory.addToppingToMenu(new Topping("Capsicum", 25));
-        pizzaFactory.addToppingToMenu(new Topping("Paneer", 35));
-        pizzaFactory.addToppingToMenu(new Topping("Mushroom", 30));
-        pizzaFactory.addToppingToMenu(new Topping("Fresh tomato", 10));
-        pizzaFactory.addToppingToMenu(new Topping("Chicken tikka", 35));
-        pizzaFactory.addToppingToMenu(new Topping("Barbeque chicken", 45));
-        pizzaFactory.addToppingToMenu(new Topping("Grilled chicken", 40));
-        pizzaFactory.addToppingToMenu(new Topping("Extra cheese", 35));
+        pizzaFactory.addToppingToMenu(new Topping("Black olive", 20, "Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Capsicum", 25,"Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Paneer", 35,"Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Mushroom", 30,"Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Fresh tomato", 10,"Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Chicken tikka", 35,"Non-Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Barbeque chicken", 45,"Non-Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Grilled chicken", 40,"Non-Veg"));
+        pizzaFactory.addToppingToMenu(new Topping("Extra cheese", 35,"Veg"));
 
         // Add sides to menu
         pizzaFactory.addSideToMenu(new Side("Cold drink", 55));
@@ -106,7 +106,7 @@ public class Main {
         System.out.println("Enter the toppings you want to add (comma separated):");
         String[] toppings = scanner.nextLine().split(",");
         for (String toppingName : toppings) {
-            pizza.addTopping(new Topping(toppingName.trim(), 0)); // Price will be set later
+            pizza.addTopping(new Topping(toppingName.trim(), 0, "")); // Price will be set later
         }
         order.addPizza(pizza);
 
