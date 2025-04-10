@@ -1,16 +1,30 @@
 package com.pizzafactory.model;
-
+/**
+ * Represents a topping for a pizza.
+ */
 public class Topping {
-    private String name;
-    private double price;
-    private String type; // Type can be "veg" or "non-veg"
-
-    public Topping(String name, double price, String type) {
-        this.name = name;
-        this.price = price;
+    // Represents the type of toppings.
+    public enum Type {
+        VEG, NON_VEG
     }
 
-    // Getters
+    private final String name;
+    private final double price;
+    private final Type type;
+
+    public Topping(String name, double price, Type type) {
+        // Validate the name, price, and type fields.
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Topping name cannot be null or empty");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
+        this.name = name;
+        this.price = price;
+        this.type = type;
+    }
+
     public String getName() {
         return name;
     }
@@ -19,25 +33,11 @@ public class Topping {
         return price;
     }
 
-    // Setters
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public boolean isNonVeg() {
-        // Assuming non-veg toppings have specific names
-        return name.equals("Chicken tikka") || name.equals("Barbeque chicken") || name.equals("Grilled chicken");
-    }
-
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public boolean isNonVeg() {
+        return type == Type.NON_VEG;
     }
 }

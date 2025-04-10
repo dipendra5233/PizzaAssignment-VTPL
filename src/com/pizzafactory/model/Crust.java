@@ -1,17 +1,20 @@
 package com.pizzafactory.model;
-
+/**
+ * Represents a crust type for a pizza.
+ */
 public class Crust {
-    private String name;
+    // The name of the crust
+    private final String name;
 
     public Crust(String name) {
+        // Validate the name field
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Crust name cannot be null or empty");
+        }
         this.name = name;
     }
 
-    // Getters and setters
     public String getName() {
         return name;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
 }

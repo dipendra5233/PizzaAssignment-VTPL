@@ -1,27 +1,28 @@
 package com.pizzafactory.model;
-
+/**
+ * Represents a side item in the pizza factory.
+ */
 public class Side {
-    private String name;
-    private double price;
+    private final String name;
+    private final double price;
 
     public Side(String name, double price) {
+        // Validate the name and price fields.
+        if (name == null || name.isEmpty()) {
+            throw new IllegalArgumentException("Side name cannot be null or empty");
+        }
+        if (price < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
+        }
         this.name = name;
         this.price = price;
     }
 
-    // Getters and setters
     public String getName() {
         return name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
+
     public double getPrice() {
         return price;
     }
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-
 }
