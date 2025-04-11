@@ -1,22 +1,19 @@
 package com.pizzafactory.util.order;
 
-import com.pizzafactory.model.*;
-import com.pizzafactory.service.InventoryService;
+import com.pizzafactory.model.Inventory;
+import com.pizzafactory.model.Order;
+import com.pizzafactory.util.BusinessRules;
 
-/**
- * OrderVerifier class is responsible for verifying orders based on the provided strategy.
- * It uses the InventoryService to get the current inventory status.
- */
 public class OrderVerifier {
-    private final OrderVerificationStrategy orderVerificationStrategy;
-    private final InventoryService inventoryService;
+    private final BusinessRules businessRules;
+    private final Inventory inventory;
 
-    public OrderVerifier(OrderVerificationStrategy orderVerificationStrategy, InventoryService inventoryService) {
-        this.orderVerificationStrategy = orderVerificationStrategy;
-        this.inventoryService = inventoryService;
+    public OrderVerifier(BusinessRules businessRules, Inventory inventory) {
+        this.businessRules = businessRules;
+        this.inventory = inventory;
     }
 
     public boolean verifyOrder(Order order) {
-        return orderVerificationStrategy.verifyOrder(order, inventoryService.getInventory());
+        return businessRules.verifyOrder(order, inventory);
     }
 }

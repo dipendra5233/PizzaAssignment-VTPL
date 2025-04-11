@@ -5,7 +5,10 @@ import com.pizzafactory.model.Inventory;
 import com.pizzafactory.util.Rules.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+ * BusinessRules class is responsible for managing and verifying business rules for pizza orders.
+ * It contains a list of rules and provides methods to add new rules and verify an order against the rules.
+ */
 public class BusinessRules {
     private final List<BusinessRule> rules;
 
