@@ -1,7 +1,8 @@
-package com.pizzafactory.service;
+package com.pizzafactory.util.order;
 
 import com.pizzafactory.model.*;
-import com.pizzafactory.util.OrderVerificationStrategy;
+import com.pizzafactory.service.InventoryService;
+
 /**
  * OrderVerifier class is responsible for verifying orders based on the provided strategy.
  * It uses the InventoryService to get the current inventory status.

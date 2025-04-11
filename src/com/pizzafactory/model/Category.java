@@ -1,5 +1,7 @@
 package com.pizzafactory.model;
-
+/**
+ * Represents a category for a pizza or side item.
+ */
 public class Category {
     private String name;
 

@@ -2,7 +2,10 @@ package com.pizzafactory.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Order class represents a customer's order in the pizza factory.
+ * It contains a list of pizzas and sides ordered by the customer.
+ */
 public class Order {
     private Customer customer;
     private List<Pizza> pizzas = new ArrayList<>();

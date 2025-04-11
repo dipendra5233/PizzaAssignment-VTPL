@@ -1,6 +1,8 @@
-package com.pizzafactory.util;
+package com.pizzafactory.util.Rules;
 
 import com.pizzafactory.model.*;
+import com.pizzafactory.util.BusinessRule;
+
 /**
  * This class implements a business rule that checks if a large pizza has more than 2 free toppings.
  * If it does, the rule will return false and print a message indicating the violation.

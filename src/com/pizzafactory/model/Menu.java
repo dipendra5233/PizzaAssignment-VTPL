@@ -2,7 +2,10 @@ package com.pizzafactory.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Menu class represents the menu of the pizza factory.
+ * It contains a list of pizzas, toppings, sides, and crusts available for order.
+ */
 public class Menu {
     private List<Pizza> pizzas;
     private List<Topping> toppings;

@@ -2,7 +2,10 @@ package com.pizzafactory.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Pizza class represents a pizza in the pizza factory.
+ * It contains details about the pizza such as name, size, type, crust, price, and toppings.
+ */
 public class Pizza {
     private String name;
     private String size;

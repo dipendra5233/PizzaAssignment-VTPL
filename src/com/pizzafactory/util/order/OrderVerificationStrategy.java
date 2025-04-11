@@ -1,4 +1,4 @@
-package com.pizzafactory.util;
+package com.pizzafactory.util.order;
 
 import com.pizzafactory.model.Inventory;
 import com.pizzafactory.model.Order;

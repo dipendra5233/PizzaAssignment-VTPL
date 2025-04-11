@@ -2,7 +2,10 @@ package com.pizzafactory.model;
 
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * Inventory class represents the stock of ingredients in the pizza factory.
+ * It manages the restocking and availability of ingredients.
+ */
 public class Inventory {
     private Map<String, Integer> stock = new HashMap<>();
 

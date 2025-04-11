@@ -1,5 +1,7 @@
 package com.pizzafactory.model;
-
+/**
+ * Represents a customer in the pizza factory system.
+ */
 public class Customer {
     private String name;
     private String contact;

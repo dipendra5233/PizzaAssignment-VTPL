@@ -1,9 +1,13 @@
 package com.pizzafactory.service;
 
-import com.pizzafactory.model.*;
+import com.pizzafactory.model.Order;
+import com.pizzafactory.model.Pizza;
+import com.pizzafactory.model.Side;
+import com.pizzafactory.model.Topping;
+import com.pizzafactory.util.order.OrderVerifier;
 /**
- * OrderService is responsible for managing orders in the pizza factory.
- * It handles order placement, inventory deduction, and order verification.
+ * OrderService class handles the order placement process in the pizza factory.
+ * It verifies the order and deducts the inventory accordingly.
  */
 public class OrderService {
     private final InventoryService inventoryService;

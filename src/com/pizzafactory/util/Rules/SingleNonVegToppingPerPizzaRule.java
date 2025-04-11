@@ -1,6 +1,8 @@
-package com.pizzafactory.util;
+package com.pizzafactory.util.Rules;
 
 import com.pizzafactory.model.*;
+import com.pizzafactory.util.BusinessRule;
+
 /**
  * This class implements a business rule that ensures that each pizza in an order has at most one non-veg topping.
  */
