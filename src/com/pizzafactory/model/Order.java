@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class Order {
     private Customer customer;
-    private List<Pizza> pizzas = new ArrayList<>();
-    private List<Side> sides = new ArrayList<>();
+    final private List<Pizza> pizzas = new ArrayList<>();
+    final private List<Side> sides = new ArrayList<>();
 
     public Order(Customer customer) {
         this.customer = customer;
@@ -29,19 +29,5 @@ public class Order {
 
     public List<Side> getSides() {
         return sides;
-    }
-
-    public double getTotalAmount() {
-        double total = 0;
-        for (Pizza pizza : pizzas) {
-            total += pizza.getPrice();
-            for (Topping topping : pizza.getToppings()) {
-                total += topping.getPrice();
-            }
-        }
-        for (Side side : sides) {
-            total += side.getPrice();
-        }
-        return total;
     }
 }

@@ -7,7 +7,7 @@ import java.util.Map;
  * It manages the restocking and availability of ingredients.
  */
 public class Inventory {
-    private Map<String, Integer> stock = new HashMap<>();
+    final private Map<String, Integer> stock = new HashMap<>();
 
     public synchronized void restock(String item, int quantity) {
         stock.put(item, stock.getOrDefault(item, 0) + quantity);
